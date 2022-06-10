@@ -7,15 +7,10 @@ void main() {
 class MyApp extends StatelessWidget {
 
   const MyApp({Key? key}) : super(key: key);
-<<<<<<< HEAD
-
-=======
->>>>>>> ca19b506c285e5c76794e62c2321b2bc47090c30
   @override
   Widget build(BuildContext context) {
     
     return MaterialApp(
-<<<<<<< HEAD
       title: 'GarBee',
       home: Scaffold(
         appBar: AppBar(
@@ -36,12 +31,10 @@ class MyApp extends StatelessWidget {
           ],
         ),
         
-        bottomNavigationBar: BottomAppBar(),
+        bottomNavigationBar: BottomAppBar(
+          
+        ),
       )
-=======
-      home: Text('Hello')
->>>>>>> ca19b506c285e5c76794e62c2321b2bc47090c30
     );
-
   }
 }
