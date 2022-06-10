@@ -1,16 +1,35 @@
-# pbl3_garbee
+# README
 
-A new Flutter project.
+# PBL3 Group 6: Garbee
 
-## Getting Started
+This is to summarize all tasks for coding. This may be separated into several different files later.
 
-This project is a starting point for a Flutter application.
+## Development Progression
 
-A few resources to get you started if this is your first Flutter project:
+Date last updated: June 10, 2022
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Major Features
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+> Illustrations are going to be uploaded later.
+> 
+- Button “Upload a photo”
+    
+    Click and choose a photo to upload
+    
+
+(Analyze the photo using API)
+
+- Display an instruction
+    
+    EXAMPLE:
+    
+    - Detected object: PET bottle
+    - Classification: PET, Plastics
+    - Instruction: Separate the cap and the label and dispose them to Plastics. Throw away the bottle to PET Bottles.
+
+## Additional Features
+
+Add the following functions AFTER finishing the major feature above.
+
+- [ ]  Translation
+- [ ]  Log
