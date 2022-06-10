@@ -1,5 +1,3 @@
-# README
-
 # PBL3 Group 6: Garbee
 
 This is to summarize all tasks for coding. This may be separated into several different files later.
