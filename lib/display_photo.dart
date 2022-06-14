@@ -16,11 +16,7 @@ class DisplayPhoto extends StatelessWidget {
         title: Text("Screen B"),
       ),
 
-      body: Image(
-        image: userImage,
-        //Error:
-        // type '_File' is not a subtype of type 'String'
-      )
+      body: Image.file(userImage),
     );
   }
 }

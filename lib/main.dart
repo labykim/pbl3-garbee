@@ -27,7 +27,6 @@ class MyApp extends StatelessWidget {
         body: const MyStatefulWidget(),
         
         bottomNavigationBar: BottomAppBar(
-          
         ),
       )
     );
@@ -38,10 +37,10 @@ class MyStatefulWidget extends StatefulWidget {
   const MyStatefulWidget({Key? key}) : super(key: key);
 
   @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+  State<MyStatefulWidget> createState() => FirstButtonClass();
 }
 
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+class FirstButtonClass extends State<MyStatefulWidget> {
 
   var userImage;
 
