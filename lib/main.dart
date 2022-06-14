@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-
 import 'display_photo.dart';
+import 'splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,12 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'GarBee',
       home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.lightBlue,
-          elevation: 0,
-          title: Text('PBL3 Group 6: GarBee'),
-          centerTitle: true,
-        ),
+        
 
         body: const MyStatefulWidget(),
         
