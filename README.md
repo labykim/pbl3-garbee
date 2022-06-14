@@ -35,9 +35,9 @@ Add the following functions AFTER finishing the major feature above.
 
 ## Naming Conventions
 ### Branch
-> "name"/"event"_"detail"  
+> "name"/"event"\_"detail"  
 > all in lowercase
-> "_" to distinguish, "-" to space
+> "\_" to distinguish, "-" to space
 
 - "name" : e.g. artie, tony, alice, daffa, coco, braces
 - "event" : e.g. feature, practice, bugfix, issue
