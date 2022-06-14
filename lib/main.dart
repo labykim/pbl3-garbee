@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
+import 'display_photo.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -62,6 +64,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               if(image !=null){
                 setState(() {
                 userImage = File(image.path);
+
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(builder: (_) => DisplayPhoto(userImage)));
                 });
               }
             },
