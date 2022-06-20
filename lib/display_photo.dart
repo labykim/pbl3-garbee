@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
 
-class DisplayPhoto extends StatelessWidget {
-  //const DisplayPhoto({Key? key}) : super(key: key);
-  // If uncomment line 4, it conflicts with line 9 constructor
-
+class AnalysisScreen extends StatelessWidget {
   var userImage;
-
-  DisplayPhoto(var userImage) {
-    this.userImage = userImage;
-  }
+  var kakaoOutput, googleOutput;
+  AnalysisScreen(this.userImage, this.kakaoOutput, this.googleOutput, 
+    {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Uploaded photo"),
+        title: Text("Analysis results"),
       ),
 
-      body: Image.file(userImage),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Image.file(userImage),
+            Text(kakaoOutput),
+            Text('---------------------------'),
+            Text(googleOutput)
+          ],
+        )
+      )
     );
   }
 }

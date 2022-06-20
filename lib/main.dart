@@ -1,15 +1,16 @@
+import 'dart:io' as io;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
+import 'api_request.dart';
 import 'display_photo.dart';
-import 'splash_screen.dart';
+// import 'splash_screen.dart';    <<<  is not coded yet
 
 void main() {
-  runApp(const MyApp());
+  runApp(const HomeScreen());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'GarBee',
       home: Scaffold(
         
-
-        body: const MyStatefulWidget(),
+        body: const SelectImageButton(),
         
         bottomNavigationBar: BottomAppBar(
         ),
@@ -28,22 +28,23 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
+class SelectImageButton extends StatefulWidget {
+  const SelectImageButton({Key? key}) : super(key: key);
 
   @override
-  State<MyStatefulWidget> createState() => FirstButtonClass();
+  State<SelectImageButton> createState() => SelectImageButtonState();
 }
 
-class FirstButtonClass extends State<MyStatefulWidget> {
+class SelectImageButtonState extends State<SelectImageButton> {
 
   var userImage;
 
   @override
   Widget build(BuildContext context) {
     final ButtonStyle style = ElevatedButton.styleFrom(
-        textStyle: const TextStyle(fontSize: 40),
-        minimumSize: Size(200, 100));
+      textStyle: const TextStyle(fontSize: 40),
+      minimumSize: Size(200, 100),
+    );
 
     return Center(
       child: Column(
@@ -53,19 +54,22 @@ class FirstButtonClass extends State<MyStatefulWidget> {
           ElevatedButton(
             style: style,
             onPressed: () async {
-              var picker = ImagePicker();
-              var image = await picker.pickImage(source: ImageSource.gallery);
-              if(image !=null){
-                setState(() {
-                userImage = File(image.path);
+              var image = await ImagePicker().pickImage(source: ImageSource.gallery);
+              if(image == null) return; // Maybe add some lines for this part later
 
+              var kakaoOutput = await kakaoVision(image.path);
+              var googleOutput = await googleVision(image);
+
+              setState(() {
+                userImage = io.File(image.path);
                 Navigator.push(
                   context, 
-                  MaterialPageRoute(builder: (_) => DisplayPhoto(userImage)));
-                });
-              }
+                  MaterialPageRoute(builder: (_) => 
+                  AnalysisScreen(userImage, kakaoOutput, googleOutput))
+                );
+              });
             },
-            child: const Text('Upload a photo'),
+            child: const Text('Select from Gallery'),
           ),
         ],
       ),

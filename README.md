@@ -21,7 +21,7 @@ Follow the issue number on "Issues" page
 ## Objectives
 ### Prototype v0.1
 - [x] ~~A button for uploading a photo~~
-- [ ] Send the photo to API server
-- [ ] Receive the result from the API server
+- [x] ~~Send the photo to API server~~
+- [x] ~~Receive the result from the API server~~
 - [x] ~~Display the uploaded photo~~
-- [ ] Display the result
+- [x] ~~Display the result~~
