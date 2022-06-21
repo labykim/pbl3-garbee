@@ -4,40 +4,21 @@ import 'dart:typed_data';
 import 'package:http/http.dart' as http;
 import 'api_key.dart';
 
-Future<String> kakaoVision(var inputImage) async {
-  // Format: 'png' or 'jpg' *not sure
-  // Under 2048px, maximum 2MB
-  Uri uri = Uri.parse('https://dapi.kakao.com/v2/vision/product/detect');
-
-  var request = http.MultipartRequest('POST', uri)
-  // http.MultipartRequest is a 'multipart/form-data' request
-  ..headers.addAll({'Authorization': ApiKey.getKakao()})
-  ..files.add(await http.MultipartFile.fromPath('image', inputImage));
-  
-  var response = await request.send();
-  var responsed = await http.Response.fromStream(response);
-
-  print(response.statusCode);
-  print(responsed.body);
-
-  return responsed.body;
-}
-
-Future<String> googleVision(var inputImage) async {
-  String uri = 'https://vision.googleapis.com/v1/images:annotate';
+Future<List<String>> googleVision(var inputImage) async {
+  String endpoint = 'https://vision.googleapis.com/v1/images:annotate';
   String key = ApiKey.getGoogle();
-  String uriAndKey = '$uri?key=$key';
-  Uri inputUri = Uri.parse(uriAndKey);
+  String uri = '$endpoint?key=$key';
+  Uri parsedUri = Uri.parse(uri);
   
   Uint8List byteImage = await inputImage.readAsBytes();
   String base64Image = base64.encode(byteImage);
 
   var request = http.post(
-    inputUri,
+    parsedUri,
     headers: <String, String>{
       'Content-Type': 'application/json',
       'charset': 'utf-8'
-    },
+    },  // Unlike the request to Kakao, 'Content-Type' is required
     body: jsonEncode(<String, dynamic> {
       'requests': {
         'image': {
@@ -47,21 +28,36 @@ Future<String> googleVision(var inputImage) async {
           "type": "OBJECT_LOCALIZATION"
         }
       }
-    })
+    })  // Following the desired format (structure)
   );
-  final response = await request;
+  http.Response response = await request;
   
-  print(response.statusCode);
-  print(response.body);
+  // Filtering the response
+  var responseBody = jsonDecode(response.body);
+  List<dynamic> annotationsList = responseBody['responses'][0]['localizedObjectAnnotations'];
+  List<String> detectedObjectList = [];
 
-  return response.body;
+  for(int i=0; i<annotationsList.length; i++) {
+    detectedObjectList.add(annotationsList[i]['name']);
+    print(detectedObjectList);
+  }
+
+  return detectedObjectList;
 }
 
-// ---------------References---------------
-// https://stackoverflow.com/questions/67314634/flutter-upload-file-through-rest-api-endpoint
-// https://stackoverflow.com/questions/49125191/how-to-upload-images-and-file-to-a-server-in-flutter
-// https://pub.dev/documentation/http/latest/http/MultipartRequest-class.html
-// https://pub.dev/documentation/http/latest/http/MultipartFile-class.html
-// https://medium.com/nerd-for-tech/multipartrequest-in-http-for-sending-images-videos-via-post-request-in-flutter-e689a46471ab
+Future<String> kakaoVision(var inputImage) async {
+  Uri uri = Uri.parse('https://dapi.kakao.com/v2/vision/product/detect');
 
-// https://cloud.google.com/vision/docs/object-localizer?hl=ko#detect_objects_in_a_local_image
+  var request = http.MultipartRequest('POST', uri)
+  ..headers.addAll({'Authorization': ApiKey.getKakao()})
+  ..files.add(await http.MultipartFile.fromPath('image', inputImage));
+  // http.MultipartRequest is a 'multipart/form-data' request
+  // so it does not require to add a 'Content-Type' header
+  
+  var response = await request.send();
+  http.Response responseJSON = await http.Response.fromStream(response);
+
+  return responseJSON.body;
+  // Unhandled exceptions:
+  // Under 2048x2048 pixels, maximum size of 2MB
+}

@@ -19,7 +19,7 @@ class AnalysisScreen extends StatelessWidget {
             Image.file(userImage),
             Text(kakaoOutput),
             Text('---------------------------'),
-            Text(googleOutput)
+            Text(googleOutput[0]),
           ],
         )
       )
