@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return MaterialApp(
-      title: 'GarBee',
+      title: 'GarBEE',
       home: Scaffold(
         
         body: const SelectImageButton(),
@@ -36,13 +36,12 @@ class SelectImageButton extends StatefulWidget {
 }
 
 class SelectImageButtonState extends State<SelectImageButton> {
-
   var userImage;
 
   @override
   Widget build(BuildContext context) {
     final ButtonStyle style = ElevatedButton.styleFrom(
-      textStyle: const TextStyle(fontSize: 40),
+      textStyle: const TextStyle(fontSize: 30),
       minimumSize: Size(200, 100),
     );
 
@@ -57,7 +56,6 @@ class SelectImageButtonState extends State<SelectImageButton> {
               var image = await ImagePicker().pickImage(source: ImageSource.gallery);
               if(image == null) return; // Maybe add some lines for this part later
 
-              var kakaoOutput = await kakaoVision(image.path);
               var googleOutput = await googleVision(image);
 
               setState(() {
@@ -65,7 +63,7 @@ class SelectImageButtonState extends State<SelectImageButton> {
                 Navigator.push(
                   context, 
                   MaterialPageRoute(builder: (_) => 
-                  AnalysisScreen(userImage, kakaoOutput, googleOutput))
+                  AnalysisScreen(userImage, googleOutput))
                 );
               });
             },
@@ -75,4 +73,26 @@ class SelectImageButtonState extends State<SelectImageButton> {
       ),
     );
   }
+}
+
+Future pickImage() async {
+  var selected = await ImagePicker().pickImage(source: ImageSource.gallery);
+  
+  if(selected == null) return null;
+
+  var apiOutput = await googleVision(selected);
+  var imageData = io.File(selected.path);
+
+  return imageData;
+}
+
+class DataHolder {
+  var _imageData;
+  List _list = [];
+  DataHolder(imageData, list) {
+    _imageData = imageData;
+    _list = list;
+  }
+
+  
 }

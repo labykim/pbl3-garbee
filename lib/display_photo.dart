@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class AnalysisScreen extends StatelessWidget {
-  var userImage;
-  var kakaoOutput, googleOutput;
-  AnalysisScreen(this.userImage, this.kakaoOutput, this.googleOutput, 
-    {Key? key}) : super(key: key);
+  final userImage;
+  final googleOutput;
+  AnalysisScreen(this.userImage, 
+                this.googleOutput, 
+                {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +18,7 @@ class AnalysisScreen extends StatelessWidget {
         child: Column(
           children: [
             Image.file(userImage),
-            Text(kakaoOutput),
-            Text('---------------------------'),
-            Text(googleOutput[0]),
+            Text(googleOutput[0]),    // Add list view here
           ],
         )
       )

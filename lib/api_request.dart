@@ -18,7 +18,7 @@ Future<List<String>> googleVision(var inputImage) async {
     headers: <String, String>{
       'Content-Type': 'application/json',
       'charset': 'utf-8'
-    },  // Unlike the request to Kakao, 'Content-Type' is required
+    },
     body: jsonEncode(<String, dynamic> {
       'requests': {
         'image': {
@@ -28,7 +28,7 @@ Future<List<String>> googleVision(var inputImage) async {
           "type": "OBJECT_LOCALIZATION"
         }
       }
-    })  // Following the desired format (structure)
+    })  // Following the desired format
   );
   http.Response response = await request;
   
@@ -58,6 +58,4 @@ Future<String> kakaoVision(var inputImage) async {
   http.Response responseJSON = await http.Response.fromStream(response);
 
   return responseJSON.body;
-  // Unhandled exceptions:
-  // Under 2048x2048 pixels, maximum size of 2MB
 }
