@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class AnalysisScreen extends StatelessWidget {
-  final userImage;
+  final imagePath;
   final googleOutput;
-  AnalysisScreen(this.userImage, 
+  
+  AnalysisScreen(this.imagePath, 
                 this.googleOutput, 
                 {Key? key}) : super(key: key);
 
@@ -17,8 +18,9 @@ class AnalysisScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image.file(userImage),
-            Text(googleOutput[0]),    // Add list view here
+            Image.file(imagePath),
+            // Text(googleOutput[0]),
+            // Add list view here
           ],
         )
       )

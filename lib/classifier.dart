@@ -1,28 +1,29 @@
-dynamic classifier(List<String> input) {
+import 'data/find_category.dart';
+import 'data/find_instruction.dart';
+
+// Returns a category and detailed instructions
+List<String>? classifier(List<String> objectList) {
   List<String> output = [];
+  String? tmp;
 
+  tmp = getCategory(objectList);
+  if(tmp == null) return null;
 
-
-  Map<String, String> findCategory = {
-    "Plastic bottle" : "PET",
-    "Paper cup" : "Combustible",
-    "Instant noodle" : "Combustible",
-    "Pen" : "Plastics",
-    "Packaged goods" : "",
-    "Tumbler" : "",
-    "Bottle" : "null",
-  };
-
-  if(output == "null") {
-    return null;
-  }
-
-  Map<String, List<String>> findInstruction = {
-    "Plastics" : [""],
-    "PET" : ["1. Separate the cap and the label.", "2. Bottle to PET, cap and label to plastics."],
-  };
-
-
-
+  output[0] = tmp;
+  output.addAll(getInstruction(output[0]));
+  
   return output;
+}
+
+String? getCategory(List<String> objectList) {
+  for(int i=0; i<objectList.length; i++) {
+    if(findCategory.containsKey(objectList[i])) {
+      return findCategory[objectList[i]];
+    }
+  }
+  return null;
+}
+
+List<String> getInstruction(String category) {
+  return findInstruction[category]!;
 }

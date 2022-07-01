@@ -39,9 +39,8 @@ Future<List<String>> googleVision(var inputImage) async {
 
   for(int i=0; i<annotationsList.length; i++) {
     detectedObjectList.add(annotationsList[i]['name']);
-    print(detectedObjectList);
   }
-
+  print(responseBody);
   return detectedObjectList;
 }
 

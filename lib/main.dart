@@ -36,7 +36,7 @@ class SelectImageButton extends StatefulWidget {
 }
 
 class SelectImageButtonState extends State<SelectImageButton> {
-  var userImage;
+  var imagePath;
 
   @override
   Widget build(BuildContext context) {
@@ -59,11 +59,11 @@ class SelectImageButtonState extends State<SelectImageButton> {
               var googleOutput = await googleVision(image);
 
               setState(() {
-                userImage = io.File(image.path);
+                imagePath = io.File(image.path);
                 Navigator.push(
                   context, 
                   MaterialPageRoute(builder: (_) => 
-                  AnalysisScreen(userImage, googleOutput))
+                  AnalysisScreen(imagePath, googleOutput))
                 );
               });
             },
@@ -75,24 +75,28 @@ class SelectImageButtonState extends State<SelectImageButton> {
   }
 }
 
-Future pickImage() async {
-  var selected = await ImagePicker().pickImage(source: ImageSource.gallery);
+Future imageProcess() async {
+  XFile? imageSelected = await ImagePicker().pickImage(source: ImageSource.gallery);
+  if(imageSelected == null) return null;
   
-  if(selected == null) return null;
+  io.File imagePath = io.File(imageSelected.path);
+  var apiOutput = await googleVision(imageSelected);
 
-  var apiOutput = await googleVision(selected);
-  var imageData = io.File(selected.path);
-
-  return imageData;
+  return imagePath;
 }
 
-class DataHolder {
+class DataContainer {
   var _imageData;
   List _list = [];
-  DataHolder(imageData, list) {
+  DataContainer(imageData, list) {
     _imageData = imageData;
     _list = list;
   }
 
-  
+  dynamic getImage() {
+    return _imageData;
+  }
+  List getList() {
+    return _list;
+  }
 }
