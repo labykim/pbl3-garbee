@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'screens/analysis_screen.dart';
+import 'utilities/image_process.dart';
 
 void main() {
   runApp(const HomeScreen());
@@ -49,11 +49,11 @@ class SelectImageButtonState extends State<SelectImageButton> {
           ElevatedButton(
             style: style,
             onPressed: () async {
-              XFile? imageSelected = await imageProcess();
+              var imageSelected = await imageProcess();
               if(imageSelected == null) return; // Add pop-up message here
               DataContainer.setImageSelected(imageSelected);
-              if(DataContainer.getApiResult() == null) return;
               DataContainer.setApiResult();
+
               setState(() {
                 Navigator.push(
                   context, 
@@ -67,11 +67,4 @@ class SelectImageButtonState extends State<SelectImageButton> {
       ),
     );
   }
-}
-
-Future<XFile?> imageProcess() async {
-  XFile? imageSelected = await ImagePicker().pickImage(source: ImageSource.gallery);
-  if(imageSelected == null) return null;
-
-  return imageSelected;
 }

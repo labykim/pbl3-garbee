@@ -1,7 +1,7 @@
 import 'dart:io' as io;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import '../api/api_request.dart';
+import '../services/api_request.dart';
 
 class DataContainer {
   static var _image;
@@ -36,7 +36,14 @@ class AnalysisScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("Analysis results"),
       ),
-      body: DisplayImage(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            DisplayImage(), 
+            
+          ],
+        )
+      )
     );
   }
 }
