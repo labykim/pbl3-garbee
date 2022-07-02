@@ -1,5 +1,5 @@
-import 'data/find_category.dart';
-import 'data/find_instruction.dart';
+import '../data/find_category.dart';
+import '../data/find_instruction.dart';
 
 // Returns a category and detailed instructions
 List<String>? classifier(List<String> objectList) {

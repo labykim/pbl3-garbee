@@ -1,9 +1,6 @@
-import 'dart:io' as io;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'api_request.dart';
-import 'display_photo.dart';
-// import 'splash_screen.dart';    <<<  is not coded yet
+import 'screens/analysis_screen.dart';
 
 void main() {
   runApp(const HomeScreen());
@@ -36,7 +33,6 @@ class SelectImageButton extends StatefulWidget {
 }
 
 class SelectImageButtonState extends State<SelectImageButton> {
-  var imagePath;
 
   @override
   Widget build(BuildContext context) {
@@ -53,17 +49,15 @@ class SelectImageButtonState extends State<SelectImageButton> {
           ElevatedButton(
             style: style,
             onPressed: () async {
-              var image = await ImagePicker().pickImage(source: ImageSource.gallery);
-              if(image == null) return; // Maybe add some lines for this part later
-
-              var googleOutput = await googleVision(image);
-
+              XFile? imageSelected = await imageProcess();
+              if(imageSelected == null) return; // Add pop-up message here
+              DataContainer.setImageSelected(imageSelected);
+              if(DataContainer.getApiResult() == null) return;
+              DataContainer.setApiResult();
               setState(() {
-                imagePath = io.File(image.path);
                 Navigator.push(
                   context, 
-                  MaterialPageRoute(builder: (_) => 
-                  AnalysisScreen(imagePath, googleOutput))
+                  MaterialPageRoute(builder: (_) => AnalysisScreen())
                 );
               });
             },
@@ -75,28 +69,9 @@ class SelectImageButtonState extends State<SelectImageButton> {
   }
 }
 
-Future imageProcess() async {
+Future<XFile?> imageProcess() async {
   XFile? imageSelected = await ImagePicker().pickImage(source: ImageSource.gallery);
   if(imageSelected == null) return null;
-  
-  io.File imagePath = io.File(imageSelected.path);
-  var apiOutput = await googleVision(imageSelected);
 
-  return imagePath;
-}
-
-class DataContainer {
-  var _imageData;
-  List _list = [];
-  DataContainer(imageData, list) {
-    _imageData = imageData;
-    _list = list;
-  }
-
-  dynamic getImage() {
-    return _imageData;
-  }
-  List getList() {
-    return _list;
-  }
+  return imageSelected;
 }

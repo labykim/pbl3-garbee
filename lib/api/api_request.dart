@@ -28,7 +28,7 @@ Future<List<String>> googleVision(var inputImage) async {
           "type": "OBJECT_LOCALIZATION"
         }
       }
-    })  // Following the desired format
+    })
   );
   http.Response response = await request;
   
@@ -41,6 +41,7 @@ Future<List<String>> googleVision(var inputImage) async {
     detectedObjectList.add(annotationsList[i]['name']);
   }
   print(responseBody);
+  print(detectedObjectList);
   return detectedObjectList;
 }
 
