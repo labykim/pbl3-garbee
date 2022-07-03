@@ -52,7 +52,6 @@ class SelectImageButtonState extends State<SelectImageButton> {
               var imageSelected = await imageProcess();
               if(imageSelected == null) return; // Add pop-up message here
               DataContainer.setImageSelected(imageSelected);
-              DataContainer.setApiResult();
 
               setState(() {
                 Navigator.push(

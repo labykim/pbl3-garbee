@@ -11,9 +11,10 @@ class DataContainer {
   static void setImageSelected(XFile input) async {
     _image = input;
     _imagePath = io.File(_image.path);
+    setApiResult();
   }
-  static void setApiResult() async {
-    _apiResult = await googleVision(_image);
+  static void setApiResult() {
+    _apiResult = googleVision(_image);
   }
   
   static dynamic getImage() {
