@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/analysis_screen.dart';
 import 'utilities/image_process.dart';
+import 'utilities/data_container.dart';
 
 void main() {
   runApp(const HomeScreen());
@@ -11,14 +12,12 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return MaterialApp(
       title: 'GarBEE',
       home: Scaffold(
-        
         body: const SelectImageButton(),
-        
         bottomNavigationBar: BottomAppBar(
+          // TBA
         ),
       )
     );
@@ -27,16 +26,14 @@ class HomeScreen extends StatelessWidget {
 
 class SelectImageButton extends StatefulWidget {
   const SelectImageButton({Key? key}) : super(key: key);
-
   @override
   State<SelectImageButton> createState() => SelectImageButtonState();
 }
 
 class SelectImageButtonState extends State<SelectImageButton> {
-
   @override
   Widget build(BuildContext context) {
-    final ButtonStyle style = ElevatedButton.styleFrom(
+    final ButtonStyle buttonStyle = ElevatedButton.styleFrom(
       textStyle: const TextStyle(fontSize: 30),
       minimumSize: Size(200, 100),
     );
@@ -47,7 +44,7 @@ class SelectImageButtonState extends State<SelectImageButton> {
         children: <Widget>[
           const SizedBox(height: 30),
           ElevatedButton(
-            style: style,
+            style: buttonStyle,
             onPressed: () async {
               var imageSelected = await imageProcess();
               if(imageSelected == null) return; // Add pop-up message here
