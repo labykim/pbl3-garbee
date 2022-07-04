@@ -1,15 +1,15 @@
-import '../data/find_category.dart';
-import '../data/find_instruction.dart';
+import '../data/map_category.dart';
+import '../data/map_instruction.dart';
 
 // Returns a category and detailed instructions
 List<String>? classifier(List<String> objectList) {
   List<String> output = [];
-  String? tmp;
+  String? category;
 
-  tmp = getCategory(objectList);
-  if(tmp == null) return null;
+  category = getCategory(objectList);
+  if(category == null) return null;
 
-  output[0] = tmp;
+  output.add(category);
   output.addAll(getInstruction(output[0]));
   
   return output;

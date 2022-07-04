@@ -51,7 +51,7 @@ class SelectImageButtonState extends State<SelectImageButton> {
             onPressed: () async {
               var imageSelected = await imageProcess();
               if(imageSelected == null) return; // Add pop-up message here
-              DataContainer.setImageSelected(imageSelected);
+              DataContainer.initiate(imageSelected);
 
               setState(() {
                 Navigator.push(
