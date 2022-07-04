@@ -1,5 +1,5 @@
 # Added: Privacy
-lib/api_key.dart
+lib/services/api_key.dart
 
 # Miscellaneous
 *.class
