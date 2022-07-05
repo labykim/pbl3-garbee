@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;
-import 'api_key.dart';
+import '../data/api_key.dart';
 
 Future<List<String>> googleVision(var inputImage) async {
   String endpoint = 'https://vision.googleapis.com/v1/images:annotate';
