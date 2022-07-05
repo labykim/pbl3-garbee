@@ -4,4 +4,5 @@ Map<String, String> findCategory = {
   'Plastic bottle' : 'PET',
   'Coffee cup': 'Glass',
   'Flower': 'Flower',
+  'Packaged goods': 'FAQ',
 };

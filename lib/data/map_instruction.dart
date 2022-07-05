@@ -16,4 +16,8 @@ Map<String, List<String>> findInstruction = {
     'inst. line 2',
     'inst. line 3',
   ],
+  'FAQ': [
+    '1. It is not Frequently Asked Questions.',
+    '2. Pronounce it.',
+  ]
 };
