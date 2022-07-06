@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;
-import 'api_key.dart';
+import '../data/api_key.dart';
 
 Future<List<String>> googleVision(var inputImage) async {
   String endpoint = 'https://vision.googleapis.com/v1/images:annotate';
@@ -18,7 +18,7 @@ Future<List<String>> googleVision(var inputImage) async {
     headers: <String, String>{
       'Content-Type': 'application/json',
       'charset': 'utf-8'
-    },  // Unlike the request to Kakao, 'Content-Type' is required
+    },
     body: jsonEncode(<String, dynamic> {
       'requests': {
         'image': {
@@ -28,7 +28,7 @@ Future<List<String>> googleVision(var inputImage) async {
           "type": "OBJECT_LOCALIZATION"
         }
       }
-    })  // Following the desired format (structure)
+    })
   );
   http.Response response = await request;
   
@@ -39,9 +39,9 @@ Future<List<String>> googleVision(var inputImage) async {
 
   for(int i=0; i<annotationsList.length; i++) {
     detectedObjectList.add(annotationsList[i]['name']);
-    print(detectedObjectList);
   }
-
+  // print(responseBody);
+  // print(detectedObjectList);
   return detectedObjectList;
 }
 
@@ -58,6 +58,4 @@ Future<String> kakaoVision(var inputImage) async {
   http.Response responseJSON = await http.Response.fromStream(response);
 
   return responseJSON.body;
-  // Unhandled exceptions:
-  // Under 2048x2048 pixels, maximum size of 2MB
 }
