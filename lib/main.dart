@@ -1,9 +1,7 @@
-import 'dart:io' as io;
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'api_request.dart';
-import 'display_photo.dart';
-// import 'splash_screen.dart';    <<<  is not coded yet
+import 'screens/analysis_screen.dart';
+import 'utilities/image_process.dart';
+import 'utilities/data_container.dart';
 
 void main() {
   runApp(const HomeScreen());
@@ -14,14 +12,12 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return MaterialApp(
-      title: 'GarBee',
+      title: 'GarBEE',
       home: Scaffold(
-        
         body: const SelectImageButton(),
-        
         bottomNavigationBar: BottomAppBar(
+          // TBA
         ),
       )
     );
@@ -30,19 +26,15 @@ class HomeScreen extends StatelessWidget {
 
 class SelectImageButton extends StatefulWidget {
   const SelectImageButton({Key? key}) : super(key: key);
-
   @override
   State<SelectImageButton> createState() => SelectImageButtonState();
 }
 
 class SelectImageButtonState extends State<SelectImageButton> {
-
-  var userImage;
-
   @override
   Widget build(BuildContext context) {
-    final ButtonStyle style = ElevatedButton.styleFrom(
-      textStyle: const TextStyle(fontSize: 40),
+    final ButtonStyle buttonStyle = ElevatedButton.styleFrom(
+      textStyle: const TextStyle(fontSize: 30),
       minimumSize: Size(200, 100),
     );
 
@@ -52,20 +44,16 @@ class SelectImageButtonState extends State<SelectImageButton> {
         children: <Widget>[
           const SizedBox(height: 30),
           ElevatedButton(
-            style: style,
+            style: buttonStyle,
             onPressed: () async {
-              var image = await ImagePicker().pickImage(source: ImageSource.gallery);
-              if(image == null) return; // Maybe add some lines for this part later
-
-              var kakaoOutput = await kakaoVision(image.path);
-              var googleOutput = await googleVision(image);
+              var imageSelected = await imageProcess();
+              if(imageSelected == null) return; // Add pop-up message here
+              DataContainer.initiate(imageSelected);
 
               setState(() {
-                userImage = io.File(image.path);
                 Navigator.push(
                   context, 
-                  MaterialPageRoute(builder: (_) => 
-                  AnalysisScreen(userImage, kakaoOutput, googleOutput))
+                  MaterialPageRoute(builder: (_) => AnalysisScreen())
                 );
               });
             },
