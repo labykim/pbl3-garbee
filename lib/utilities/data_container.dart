@@ -15,7 +15,7 @@ class DataContainer {
     setResults();
   }
   static Future setResults() async {
-    _apiResult = await googleVision(_image);
+    _apiResult = await googleVisionLabel(_image);
     if(_apiResult != null) _instruction = classifier(_apiResult);
     return await _instruction;
   }

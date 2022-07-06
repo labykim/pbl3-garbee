@@ -9,7 +9,8 @@ Map<String, List<String>> findInstruction = {
     '3. Dispose the others as Plastics.'
   ],
   'Glass': [
-    'Glass breaks easily.',
+    '1. Wash inside.',
+    '2. Find a container for glass bottle and throw away.',
   ],
   'Flower': [
     'inst. line 1',
