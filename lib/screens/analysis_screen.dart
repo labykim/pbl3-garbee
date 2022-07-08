@@ -18,7 +18,6 @@ class AnalysisScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Image.file(DataContainer.getImagePath()),
-                  Text(DataContainer.getApiResult().toString()),
                   Text(DataContainer.getInstruction().toString()),
                 ],
               )

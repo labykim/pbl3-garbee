@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:http/http.dart' as http;
 import '../data/api_key.dart';
 
-Future<List<String>> googleVisionLocal(var inputImage) async {
+/*Future<List<String>> googleVisionLocal(var inputImage) async {
   String endpoint = 'https://vision.googleapis.com/v1/images:annotate';
   String key = ApiKey.getGoogle();
   String uri = '$endpoint?key=$key';
@@ -44,7 +44,7 @@ Future<List<String>> googleVisionLocal(var inputImage) async {
   // print(detectedObjectList);
   return detectedObjectList;
 }
-
+*/
 Future<List<String>> googleVisionLabel(var inputImage) async {
   String endpoint = 'https://vision.googleapis.com/v1/images:annotate';
   String key = ApiKey.getGoogle();
@@ -84,7 +84,7 @@ Future<List<String>> googleVisionLabel(var inputImage) async {
     }
   }
   //print(responseBody);
-  print(detectedObjectList);
+  //print(detectedObjectList);
   return detectedObjectList;
 }
 

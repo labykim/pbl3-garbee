@@ -21,7 +21,7 @@ String? getCategory(List<String> objectList) {
       return findCategory[objectList[i]];
     }
   }
-  return null;
+  return 'Unable to distinguish';
 }
 
 List<String> getInstruction(String category) {
