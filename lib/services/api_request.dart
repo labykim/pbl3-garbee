@@ -79,7 +79,7 @@ Future<List<String>> googleVisionLabel(var inputImage) async {
   List<String> detectedObjectList = [];
 
   for(int i=0; i<annotationsList.length; i++) {
-    if(annotationsList[i]['score'] > 0.8){
+    if(annotationsList[i]['score'] > 0.7){
       detectedObjectList.add(annotationsList[i]['description']);
     }
   }

@@ -13,6 +13,8 @@ Map<String, String> findCategory = {
   'Bicycle helmet': '燃やせないゴミ (Incombustible)',
   'Cup': '燃やせないゴミ (Incombustible)',
   'Plastic bottle': 'プラスチック製容器包装 (PET)',
+  'Bottle': 'プラスチック製容器包装 (PET)',
+  'Bottle cap': 'プラスチック製容器包装 (PET)',
   'Packaged goods': 'FAQ',
   'Unable to distinguish': 'Unable to distinguish',
 };
