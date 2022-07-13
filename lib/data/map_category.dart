@@ -6,6 +6,7 @@ Map<String, String> findCategory = {
   'Apple': '燃やせるゴミ (Combustible)',
   'Paper box': '燃やせるゴミ (Combustible)',
   'Pen': '燃やせないゴミ (Incombustible)',
+  'Writing implement': '燃やせないゴミ (Incombustible)',
   'Umbrella': '燃やせないゴミ (Incombustible)',
   'Clothes hanger': '燃やせないゴミ (Incombustible)',
   'Bulb': '燃やせないゴミ (Incombustible)',
