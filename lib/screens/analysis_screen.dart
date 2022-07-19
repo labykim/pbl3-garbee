@@ -14,10 +14,22 @@ class AnalysisScreen extends StatelessWidget {
         future: DataContainer.setResults(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if(snapshot.hasData) {
+            List<String> tmpList = DataContainer.getApiResult();
+            String tmp = tmpList[DataContainer.getHitIndex()];
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  Image.file(DataContainer.getImagePath()),
+                  Image.file(
+                    DataContainer.getImagePath(),
+                    height: 400,
+                  ),
+                  Text(
+                    "Detected object: $tmp",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
                   Text(DataContainer.getInstruction().toString()),
                 ],
               )
