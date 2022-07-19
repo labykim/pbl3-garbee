@@ -1,3 +1,5 @@
+import 'package:pbl3_garbee/utilities/data_container.dart';
+
 import '../data/map_category.dart';
 import '../data/map_instruction.dart';
 
@@ -18,6 +20,7 @@ List<String>? classifier(List<String> objectList) {
 String? getCategory(List<String> objectList) {
   for(int i=0; i<objectList.length; i++) {
     if(findCategory.containsKey(objectList[i])) {
+      DataContainer.setHitIndex(i);
       return findCategory[objectList[i]];
     }
   }

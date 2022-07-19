@@ -17,7 +17,17 @@ class HomeScreen extends StatelessWidget {
       home: Scaffold(
         body: const SelectImageButton(),
         bottomNavigationBar: BottomAppBar(
-          // TBA
+          child: SizedBox(
+            height: 50,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Icon(Icons.list),
+                Icon(Icons.home),
+                Icon(Icons.question_mark),
+              ],
+            ),
+          )
         ),
       )
     );
